@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Sorting  Visualizer</h1>
+            <p class="subtitle">Made by Suraj And Ankit Kumar With Time Complexity</p> 
+        </header>
+
+        <!-- Controls Section -->
+        <section class="controls-section">
+            <div class="controls-row">
+                <div class="control-group">
+                    <label class="form-label" for="algorithmSelect">Algorithm</label>
+                    <select id="algorithmSelect" class="form-control">
+                        <option value="bubbleSort">Bubble Sort</option>
+                        <option value="selectionSort">Selection Sort</option>
+                        <option value="insertionSort">Insertion Sort</option>
+                        <option value="mergeSort">Merge Sort</option>
+                        <option value="quickSort">Quick Sort</option>
+                        <option value="heapSort">Heap Sort</option>
+                        <option value="radixSort">Radix Sort</option>
+                        <option value="countingSort">Counting Sort</option>
+                        <option value="bucketSort">Bucket Sort</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label class="form-label" for="arraySize">Array Size: <span id="arraySizeValue">50</span></label>
+                    <input type="range" id="arraySize" class="slider" min="10" max="100" value="50">
+                </div>
+                
+                <div class="control-group">
+                    <label class="form-label" for="animationSpeed">Speed: <span id="speedValue">5</span></label>
+                    <input type="range" id="animationSpeed" class="slider" min="1" max="10" value="5">
+                </div>
+            </div>
+            
+            <div class="controls-row">
+                <button id="generateArray" class="btn btn--secondary">Generate New Array</button>
+                <button id="startSort" class="btn btn--primary">Start Sorting</button>
+                <button id="pauseResume" class="btn btn--secondary" disabled>Pause</button>
+                <button id="reset" class="btn btn--outline">Reset</button>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Visualization Panel -->
+            <div class="visualization-panel">
+                <canvas id="arrayCanvas"></canvas>
+                
+                <!-- Color Legend -->
+                <div class="color-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #61dafb;"></div>
+                        <span>Default</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                        <span>Comparing</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #51cf66;"></div>
+                        <span>Swapping</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #4c6ef5;"></div>
+                        <span>Sorted</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #ffd43b;"></div>
+                        <span>Pivot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="stats-panel">
+                <!-- Algorithm Info -->
+                <div class="card">
+                    <div class="card__body">
+                        <h4>Current Algorithm: <span id="currentAlgorithm">Bubble Sort</span></h4>
+                        
+                        <!-- Time Complexity -->
+                        <div class="complexity-info">
+                            <h4>Time Complexity</h4>
+                            <div class="complexity-row">
+                                <span class="complexity-label">Best:</span>
+                                <span class="complexity-value" id="bestCase">O(n)</span>
+                            </div>
+                            <div class="complexity-row">
+                                <span class="complexity-label">Average:</span>
+                                <span class="complexity-value" id="averageCase">O(n²)</span>
+                            </div>
+                            <div class="complexity-row">
+                                <span class="complexity-label">Worst:</span>
+                                <span class="complexity-value" id="worstCase">O(n²)</span>
+                            </div>
+                            <div class="complexity-row">
+                                <span class="complexity-label">Space:</span>
+                                <span class="complexity-value" id="spaceComplexity">O(1)</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Statistics -->
+                        <div class="stats-info">
+                            <h4>Statistics</h4>
+                            <div class="stat-row">
+                                <span class="stat-label">Comparisons:</span>
+                                <span class="stat-value" id="comparisons">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Swaps:</span>
+                                <span class="stat-value" id="swaps">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Time:</span>
+                                <span class="stat-value" id="executionTime">0.00s</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Algorithm Description -->
+                        <div class="algorithm-info">
+                            <p id="algorithmInfo">Bubble Sort repeatedly compares adjacent elements and swaps them if they're in the wrong order.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Visualization for non-comparison sorts -->
+                <div id="specialVisualization" class="card special-viz" style="display: none;">
+                    <div class="card__body">
+                        <h4 id="specialVizTitle">Special Visualization</h4>
+                        <div id="specialVizContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
